@@ -1,3 +1,6 @@
+// 定义页面菜单对象
+//  该菜单对象在Layout.vue使用,并展示
+//  改菜单仅定义了路径,没有路由功能,改路由功能的实现由/router/index.js定义
 var menus = [
   {
     action: "home",
