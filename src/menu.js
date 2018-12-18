@@ -50,5 +50,5 @@ var menus = [
     ]
   }
 ]
-
+// VUE的export表示导出,导出一个对象.其他地方使用值需要import即可
 export default menus;

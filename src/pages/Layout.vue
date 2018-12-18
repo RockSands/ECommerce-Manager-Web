@@ -117,11 +117,11 @@
       items() {
         return menus;
       },
-      item1() {
+      item1() { // 1级目录
         const arr = this.$route.path.split("/");
         return this.menuMap[arr[1]].name;
       },
-      item2() {
+      item2() { // 2级目录
         const arr = this.$route.path.split("/");
         return this.menuMap[arr[1]][arr[2]];
       }

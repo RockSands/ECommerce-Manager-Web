@@ -42,13 +42,13 @@
 
 <script>
 export default {
-  data: () => ({
+  data: () => ({ // 定义初始数据结构,以及初始值
     username: "",
     password: "",
     dialog: false,
     e1:false
   }),
-  methods: {
+  methods: {  // 定义本地使用的方法,其中的this.属性名  就是data定义的属性
     doLogin() {
       if (!this.username || !this.password) {
         this.dialog = true;

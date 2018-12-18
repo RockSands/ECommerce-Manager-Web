@@ -10,6 +10,7 @@ function route (path, file, name, children) {
     path,
     name,
     children,
+    // 直接组件化对应pages下的文件
     component: () => import('../pages' + file)
   }
 }
