@@ -3,12 +3,15 @@
     <v-card-title>
       <v-btn color="primary" @click="addBrand">新增品牌</v-btn>
       <!--搜索框，与search属性关联-->
+      <!-- v-spacer自动填充,v-flex是布局,xs3表示暂用3块,  vue自动将一行分为12个块  -->
       <v-spacer/>
       <v-flex xs3>
       <v-text-field label="输入关键字搜索" v-model.lazy="search" append-icon="search" hide-details/>
       </v-flex>
     </v-card-title>
     <v-divider/>
+
+    <!-- v-data-table仅负责列表的表头渲染 -->
     <v-data-table
       :headers="headers"
       :items="brands"
@@ -17,10 +20,12 @@
       :loading="loading"
       class="elevation-1"
     >
+      <!-- template列表的内容渲染 -->
       <template slot="items" slot-scope="props">
         <td class="text-xs-center">{{ props.item.id }}</td>
         <td class="text-xs-center">{{ props.item.name }}</td>
         <td class="text-xs-center">
+          <!-- 注意其中的v-if 和 v-else -->
           <img v-if="props.item.image" :src="props.item.image" width="130" height="40">
           <span v-else>无</span>
         </td>
@@ -67,7 +72,7 @@
         brands: [], // 当前页品牌数据
         loading: true, // 是否在加载中
         pagination: {}, // 分页信息
-        headers: [
+        headers: [ // 列表表头信息
           {text: 'id', align: 'center', value: 'id'},
           {text: '名称', align: 'center', sortable: false, value: 'name'},
           {text: 'LOGO', align: 'center', sortable: false, value: 'image'},
@@ -79,11 +84,15 @@
         isEdit: false, // 是否是编辑
       }
     },
+    created() {// 加载页面后直接调用created, 其执行时间早于mounted.
+      // 但是created时,往往页面标签还未加载完成.所以mounted是合适的时间
+
+    },
     mounted() { // 渲染后执行
       // 查询数据
       this.getDataFromServer();
     },
-    watch: {
+    watch: { //监视属性,当属性发生变化,则会调用对应的handler方法
       pagination: { // 监视pagination属性的变化
         deep: true, // deep为true，会监视pagination的属性及属性中的对象属性变化
         handler() {
