@@ -59,7 +59,8 @@
     },
     methods: {
       submit() {
-        // 表单校验
+        // 表单校验,注意<v-form v-model="valid" ref="myBrandForm">,其中有ref定义
+        // 所以可以直接this.$refs.myBrandForm这样使用,这是ES6的特性
         if (this.$refs.myBrandForm.validate()) {
           // 定义一个请求参数对象，通过解构表达式来获取brand中的属性
           const {categories, letter, ...params} = this.brand;
@@ -72,9 +73,10 @@
           this.$http({
             method: this.isEdit ? 'put' : 'post',
             url: '/item/brand',
+            // 表单提交固定写法,
             data: this.$qs.stringify(params)
           }).then(() => {
-            // 关闭窗口
+            // 关闭窗口,$emit,子组件使用$emit调用父组件的时间
             this.$emit("close");
             this.$message.success("保存成功！");
           })
